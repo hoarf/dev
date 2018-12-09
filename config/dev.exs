@@ -66,3 +66,4 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+config :app, MarvelAPI, private_key: "6f54d43da6717f69935333ca11ad30826b547372"

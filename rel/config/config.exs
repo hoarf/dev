@@ -7,3 +7,5 @@ config :app, App.Endpoint,
   url: [host: System.get_env("HOSTNAME"), port: port],
   root: ".",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+config :app, MarvelAPI, private_key: System.get_env("MARVEL_PRIVATE_KEY")
