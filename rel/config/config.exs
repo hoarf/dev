@@ -1,12 +1,5 @@
 use Mix.Config
 
-config :app, App.Repo,
-  username: System.get_env("DATABASE_USER"),
-  password: System.get_env("DATABASE_PASS"),
-  database: System.get_env("DATABASE_NAME"),
-  hostname: System.get_env("DATABASE_HOST"),
-  pool_size: 15
-
 port = String.to_integer(System.get_env("PORT") || "8080")
 
 config :app, App.Endpoint,
