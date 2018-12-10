@@ -1,17 +1,30 @@
 defmodule MarvelAPI do
   use Tesla
 
-  plug(Tesla.Middleware.BaseUrl, "https://gateway.marvel.com/v1/public")
+  require Logger
+
   plug(Tesla.Middleware.JSON)
 
   @public_key "8111b5d86eedc6cb9ea8db2f0396eb11"
 
-  def get_story(id \\ "24459") do
+  def fetch(url) when is_bitstring(url) do
     with ts when is_bitstring(ts) <- ts(),
          private_key when is_bitstring(private_key) <- private_key(),
          hash when is_bitstring(hash) <- hash(ts, private_key),
-         story <- get("/stories/" <> id, query: [apikey: @public_key, ts: ts, hash: hash]) do
-      {:ok, story}
+         {:ok, response} <- get(url, query: [apikey: @public_key, ts: ts, hash: hash]),
+         {:ok, result} <- assert_result_is_valid(response) do
+      {:ok, result}
+    end
+  end
+
+  defp assert_result_is_valid(response) do
+    with 1 <- get_in(response.body, ["data", "count"]),
+         [result | []] <- get_in(response.body, ["data", "results"]) do
+      {:ok, result}
+    else
+      err ->
+        Logger.debug(err)
+        {:error, :invalid_response_from_marvel}
     end
   end
 
