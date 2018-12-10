@@ -4,5 +4,13 @@
 
 <section class="row">
   <article class="column">
+    <h2> Story #<%= @story.id %> </h2>
+    <p>
+      <%= @story.description %>
+    </p>
+    <h3>Charcters</h3>
+    <%= for character <- @characters do %>
+      <%= render("character.html", character: character) %>
+    <% end %>
   </article>
 </section>
