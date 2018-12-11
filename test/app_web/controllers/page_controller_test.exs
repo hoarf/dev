@@ -65,7 +65,7 @@ defmodule AppWeb.PageControllerTest do
     end
   end
 
-  describe "when character fetching fails " do
+  describe "when character fetching fails" do
     setup do
       mock(fn
         %{method: :get, url: "https://gateway.marvel.com/v1/public/stories/24459"} ->
