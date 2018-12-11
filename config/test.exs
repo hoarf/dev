@@ -8,11 +8,3 @@ config :app, AppWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-# Configure your database
-config :app, App.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "app_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
